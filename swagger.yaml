@@ -12,10 +12,10 @@ info:
 host: "maryville-guide.herokuapp.com"
 basePath: "/api"
 tags:
-- name: "user"
-  description: "User Login Credentials"
 - name: "location"
   description: "Details of All the Locations"
+- name: "user"
+  description: "User Login Credentials"
 
 schemes:
 - "https"
@@ -124,6 +124,116 @@ paths:
         description: ""
         required: true
         type: "string" 
+      - name: "likeCount"
+        in: "query"
+        description: ""
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/location"
+        "400":
+          description: "Invalid status value"
+          
+    put:
+      tags:
+      - "location"
+      summary: "Update Location"
+      description: ""
+      operationId: "putLocation"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "query"
+        type: "string"
+        required: true
+        description: ""
+      - name: "locationName"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      - name: "address"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
+      - name: "hours"
+        in: "query"
+        description: ""
+        required: true
+        type: "string" 
+      - name: "phoneNumber"
+        in: "query"
+        description: ""
+        required: true
+        type: "string" 
+      - name: "photo"
+        in: "query"
+        description: ""
+        required: true
+        type: "string" 
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/location"
+        "400":
+          description: "Invalid status value"
+          
+          
+    patch:
+      tags:
+      - "location"
+      summary: "Increase Like Count"
+      description: ""
+      operationId: "patchLocation"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "query"
+        type: "string"
+        required: true
+        description: ""
+      - name: "likeCount"
+        in: "query"
+        type: "integer"
+        required: true
+        description: ""
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/location"
+        "400":
+          description: "Invalid status value"
+          
+          
+            
+    delete:
+      tags:
+      - "location"
+      summary: "Deletes a location"
+      description: ""
+      operationId: "deleteLocation"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "query"
+        type: "string"
+        required: true
+        description: ""
       responses:
         "200":
           description: "successful operation"
@@ -136,19 +246,11 @@ paths:
 
 
 definitions:
-  user:
-    type: "object"
-    properties:
-      userName:
-        type: "string"
-      email:
-        type: "string"
-      password:
-        type: "string"
-
   location:
     type: "object"
     properties:
+      _id:
+        type: "string"
       locationName:
         type: "string"
       address:
@@ -158,6 +260,20 @@ definitions:
       phoneNumber:
         type: "string"
       photo:
+        type: "string"
+      likeCount:
+        type: "integer"
+        
+  user:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+      userName:
+        type: "string"
+      email:
+        type: "string"
+      password:
         type: "string"
 
  
